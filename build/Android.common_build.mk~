@@ -148,7 +148,7 @@ ART_C_INCLUDES := \
   frameworks/compile/mclinker/include
 
 art_cflags := \
-  -O3 \
+  -Ofast \
   -fno-rtti \
   -std=gnu++11 \
   -ggdb3 \
