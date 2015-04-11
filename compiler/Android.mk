@@ -114,6 +114,7 @@ LIBART_COMPILER_SRC_FILES := \
 	utils/x86_64/assembler_x86_64.cc \
 	utils/x86_64/managed_register_x86_64.cc \
 	utils/scoped_arena_allocator.cc \
+	utils/swap_space.cc \
 	buffered_output_stream.cc \
 	compilers.cc \
 	compiler.cc \
@@ -191,6 +192,11 @@ define build-libart-compiler
   else # debug
     LOCAL_MODULE := libartd-compiler
     LOCAL_SHARED_LIBRARIES += libartd
+  endif
+  
+  ifeq ($$(art_target_or_host),target)
+    LOCAL_CC  := $$(TARGET_TOOLCHAIN_ROOT)/../arm-linux-androideabi-4.8/bin/arm-linux-androideabi-gcc$$(HOST_EXECUTABLE_SUFFIX)
+    LOCAL_CXX := $$(TARGET_TOOLCHAIN_ROOT)/../arm-linux-androideabi-4.8/bin/arm-linux-androideabi-g++$$(HOST_EXECUTABLE_SUFFIX)
   endif
 
   LOCAL_MODULE_TAGS := optional

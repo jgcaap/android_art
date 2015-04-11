@@ -597,6 +597,15 @@ Arm64Mir2Lir::Arm64Mir2Lir(CompilationUnit* cu, MIRGraph* mir_graph, ArenaAlloca
   Arm64Mir2LirPostInit(this);
 }
 
+void Arm64Mir2Lir::Cleanup()
+{
+}
+
+Arm64Mir2Lir::~Arm64Mir2Lir()
+{
+  Cleanup();
+}
+
 void Arm64Mir2Lir::Arm64Mir2LirPostInit(Arm64Mir2Lir* mir_to_lir) {
 }
 
@@ -767,6 +776,7 @@ void Arm64Mir2Lir::FreeCallTemps() {
   FreeTemp(rs_f5);
   FreeTemp(rs_f6);
   FreeTemp(rs_f7);
+  FreeTemp(TargetReg(kHiddenArg));
 }
 
 RegStorage Arm64Mir2Lir::LoadHelper(QuickEntrypointEnum trampoline) {

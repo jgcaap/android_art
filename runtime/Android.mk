@@ -295,8 +295,10 @@ LIBART_ENUM_OPERATOR_OUT_HEADER_FILES := \
   arch/x86_64/registers_x86_64.h \
   base/allocator.h \
   base/mutex.h \
+  base/unix_file/fd_file.h \
   dex_file.h \
   dex_instruction.h \
+  gc_root.h \
   gc/collector/gc_type.h \
   gc/collector_type.h \
   gc/space/space.h \
@@ -309,7 +311,6 @@ LIBART_ENUM_OPERATOR_OUT_HEADER_FILES := \
   lock_word.h \
   mirror/class.h \
   oat.h \
-  object_callbacks.h \
   quick/inline_method_analyser.h \
   thread.h \
   thread_state.h \
@@ -398,9 +399,13 @@ $$(ENUM_OPERATOR_OUT_GEN): $$(GENERATED_SRC_DIR)/%_operator_out.cc : $(LOCAL_PAT
     # TODO: Loop with ifeq, ART_TARGET_CLANG
     ifneq ($$(ART_TARGET_CLANG_$$(TARGET_ARCH)),true)
       LOCAL_SRC_FILES_$$(TARGET_ARCH) += $$(LIBART_GCC_ONLY_SRC_FILES)
+      LOCAL_CC  := $$(TARGET_TOOLCHAIN_ROOT)/../arm-linux-androideabi-4.8/bin/arm-linux-androideabi-gcc$$(HOST_EXECUTABLE_SUFFIX)
+      LOCAL_CXX := $$(TARGET_TOOLCHAIN_ROOT)/../arm-linux-androideabi-4.8/bin/arm-linux-androideabi-g++$$(HOST_EXECUTABLE_SUFFIX)
     endif
     ifneq ($$(ART_TARGET_CLANG_$$(TARGET_2ND_ARCH)),true)
       LOCAL_SRC_FILES_$$(TARGET_2ND_ARCH) += $$(LIBART_GCC_ONLY_SRC_FILES)
+      LOCAL_CC  := $$(TARGET_TOOLCHAIN_ROOT)/../arm-linux-androideabi-4.8/bin/arm-linux-androideabi-gcc$$(HOST_EXECUTABLE_SUFFIX)
+      LOCAL_CXX := $$(TARGET_TOOLCHAIN_ROOT)/../arm-linux-androideabi-4.8/bin/arm-linux-androideabi-g++$$(HOST_EXECUTABLE_SUFFIX)
     endif
   else # host
     LOCAL_CLANG := $$(ART_HOST_CLANG)

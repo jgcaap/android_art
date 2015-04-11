@@ -570,6 +570,15 @@ ArmMir2Lir::ArmMir2Lir(CompilationUnit* cu, MIRGraph* mir_graph, ArenaAllocator*
   ArmMir2LirPostInit(this);
 }
 
+void ArmMir2Lir::Cleanup()
+{
+}
+
+ArmMir2Lir::~ArmMir2Lir()
+{
+  Cleanup();
+}
+
 void ArmMir2Lir::ArmMir2LirPostInit(ArmMir2Lir* mir_to_lir) {
 }
 
@@ -732,6 +741,7 @@ void ArmMir2Lir::FreeCallTemps() {
   FreeTemp(rs_r1);
   FreeTemp(rs_r2);
   FreeTemp(rs_r3);
+  FreeTemp(TargetReg(kHiddenArg));
 }
 
 RegStorage ArmMir2Lir::LoadHelper(QuickEntrypointEnum trampoline) {
